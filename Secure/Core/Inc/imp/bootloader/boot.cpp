@@ -9,6 +9,7 @@
 #include "boot.h"
 #include "imp/cryptography/crypto-rsa.h"
 #include "imp/storage/storage.h"
+#include "stm32l562e_discovery.h"
 
 Boot::Boot() {
 }
@@ -118,7 +119,8 @@ Boot::STATUS_t Boot::storeAssets(uint8_t *assets, size_t len) {
 
 Boot::STATUS_t Boot::updateFirmware(void) {
 	USBCDC usb;
-
+	BSP_LED_Init(LED9);
+	BSP_LED_On(LED9);
 	this->setState(Boot::STATE_t::UPDATE_PREPARATION);
 	Flash f;
 	DATA_t address;
@@ -214,7 +216,8 @@ Boot::STATUS_t Boot::updateFirmware(void) {
 
 
 
-
+	BSP_LED_Off(LED9);
+	BSP_LED_DeInit(LED9);
 	return Boot::STATUS_t::SUCCESS;
 
 }

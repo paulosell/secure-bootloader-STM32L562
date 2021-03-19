@@ -42,10 +42,12 @@ void MX_GPIO_Init(void)
 
   __HAL_RCC_GPIOG_CLK_ENABLE();
   __HAL_RCC_GPIOC_CLK_ENABLE();
+  __HAL_RCC_GPIOD_CLK_ENABLE();
   /*IO attributes management functions */
   HAL_GPIO_ConfigPinAttributes(GPIOH, GPIO_PIN_0|GPIO_PIN_1, GPIO_PIN_NSEC);
   HAL_GPIO_ConfigPinAttributes(GPIOG, GPIO_PIN_All, GPIO_PIN_NSEC);
   HAL_GPIO_ConfigPinAttributes(GPIOC, GPIO_PIN_All, GPIO_PIN_NSEC);
+  HAL_GPIO_ConfigPinAttributes(GPIOD, (GPIO_PIN_All & ~(GPIO_PIN_3)), GPIO_PIN_NSEC);;
 
 
 
