@@ -17,6 +17,11 @@ int main(void) {
 	Boot b;
 	Jumper j;
 
+
+	if (b.isButtonPressed() == Boot::STATUS_t::SUCCESS){
+		b.forceUpdateFromBootloader();
+	}
+
 	if (b.hasToUpdate()) {
 		while (b.updateFirmware() == Boot::STATUS_t::FAIL)
 			;

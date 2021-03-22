@@ -2,7 +2,7 @@
 #include "stm32l5xx_hal.h"
 #include "main.h"
 void Jumper::goToNonSecure(){
-
+	HAL_GPIO_ConfigPinAttributes(GPIOC, GPIO_PIN_All, GPIO_PIN_NSEC);
 	funcptr_NS NonSecure_ResetHandler;
 
 	  SCB_NS->VTOR = APP_START_ADDRESS;

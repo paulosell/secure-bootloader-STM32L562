@@ -46,7 +46,7 @@ void MX_GPIO_Init(void)
   /*IO attributes management functions */
   HAL_GPIO_ConfigPinAttributes(GPIOH, GPIO_PIN_0|GPIO_PIN_1, GPIO_PIN_NSEC);
   HAL_GPIO_ConfigPinAttributes(GPIOG, GPIO_PIN_All, GPIO_PIN_NSEC);
-  HAL_GPIO_ConfigPinAttributes(GPIOC, GPIO_PIN_All, GPIO_PIN_NSEC);
+  HAL_GPIO_ConfigPinAttributes(GPIOC, (GPIO_PIN_All & ~(GPIO_PIN_13)), GPIO_PIN_NSEC);
   HAL_GPIO_ConfigPinAttributes(GPIOD, (GPIO_PIN_All & ~(GPIO_PIN_3)), GPIO_PIN_NSEC);;
 
 

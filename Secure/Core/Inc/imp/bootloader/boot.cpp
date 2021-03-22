@@ -12,6 +12,38 @@
 #include "stm32l562e_discovery.h"
 
 Boot::Boot() {
+	BSP_PB_Init(BUTTON_USER, BUTTON_MODE_GPIO);
+}
+
+Boot::STATUS_t Boot::forceUpdateFromBootloader(){
+	uint32_t address = ((uint32_t)0x0803D800);
+	HAL_FLASH_Unlock();
+
+	uint32_t PageError = 0;
+	FLASH_EraseInitTypeDef EraseInitStruct;
+
+
+	EraseInitStruct.TypeErase = FLASH_TYPEERASE_PAGES;
+	EraseInitStruct.Banks = 1;
+	EraseInitStruct.Page = 123;
+	EraseInitStruct.NbPages = 1;
+
+
+	HAL_FLASHEx_Erase(&EraseInitStruct, &PageError);
+	uint64_t update = 0x0100000000000000;
+
+	HAL_FLASH_Program(FLASH_TYPEPROGRAM_DOUBLEWORD, address,update);
+
+	HAL_FLASH_Lock();
+
+};
+
+Boot::STATUS_t Boot::isButtonPressed(){
+	if(BSP_PB_GetState(BUTTON_USER) == SET){
+		return Boot::STATUS_t::SUCCESS;
+	}
+
+	return Boot::STATUS_t::FAIL;
 }
 
 Boot::STATUS_t Boot::hasToUpdate(void) {

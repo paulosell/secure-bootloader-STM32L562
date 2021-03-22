@@ -28,6 +28,8 @@ public:
 	STATUS_t validateNewFirmware(void);
 	STATUS_t finishUpdate(void);
 	STATUS_t storeAssets(uint8_t * assets, size_t len);
+	STATUS_t forceUpdateFromBootloader();
+	STATUS_t isButtonPressed();
 
 	//STATUS_t processCommand(COMMAND_t command, DATA_t  data, PROCCESS_RESULT_t * result);
 
