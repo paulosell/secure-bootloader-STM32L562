@@ -149,7 +149,7 @@ Boot::STATUS_t Boot::storeAssets(uint8_t *assets, size_t len) {
 	return Boot::STATUS_t::SUCCESS;
 }
 
-Boot::STATUS_t Boot::updateFirmware(void) {
+Boot::STATUS_t Boot::receiveNewFirmware(void) {
 	USBCDC usb;
 	BSP_LED_Init(LED9);
 	BSP_LED_On(LED9);
@@ -500,21 +500,21 @@ Boot::STATUS_t Boot::checkNewFirmwareSignature(void) {
 	uint8_t modulo[256];
 	uint8_t expoente[3];
 
-	if (s.readData(modulo, Storage::ASSET_t::PUBLIC_MODULUS)
+	if (s.readData(expoente, Storage::ASSET_t::PUBLIC_EXPONENT)
 			!= Storage::STATUS_t::SUCCESS) {
 		return result;
 	}
 
-	if (s.readData(expoente, Storage::ASSET_t::KEY_EXPONENT)
+	if (s.readData(modulo, Storage::ASSET_t::MODULUS)
 			!= Storage::STATUS_t::SUCCESS) {
 		return result;
 	}
 
-	CryptoRSA::chave_t chave_publica;
-	chave_publica.expoente = (uint8_t*) expoente;
-	chave_publica.modulo = (uint8_t*) modulo;
-	chave_publica.expoente_len = 3;
-	chave_publica.modulo_len = 256;
+	CryptoRSA::key_t chave_publica;
+	chave_publica.exponent = (uint8_t*) expoente;
+	chave_publica.modulus = (uint8_t*) modulo;
+	chave_publica.exponent_len = 3;
+	chave_publica.modulus_len = 256;
 	uint8_t assinatura[256];
 
 	if (s.readData(assinatura, Storage::ASSET_t::NEW_FIRMWARE_SIGNATURE)

@@ -28,10 +28,6 @@ FlashManager::STATUS_t FlashManager::flashErase(DATA_t address){
 	return STATUS_t::SUCCESS;
 }
 
-/* MUST BE IMPLEMENTED BY USER*/
-FlashManager::STATUS_t FlashManager::flashRead(DATA_t address, DATA_t *word_out){
-	return STATUS_t::SUCCESS;
-}
 
 /* MUST BE IMPLEMENTED BY USER*/
 FlashManager::STATUS_t FlashManager::flashLock(void){

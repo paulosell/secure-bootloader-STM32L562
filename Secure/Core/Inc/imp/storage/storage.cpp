@@ -13,11 +13,11 @@ Storage::STATUS_t Storage::readData(uint8_t * out, ASSET_t asset){
 
 	Storage::STATUS_t status = Storage::STATUS_t::SUCCESS;
 	switch (asset){
-	case Storage::ASSET_t::PUBLIC_MODULUS:
-		memcpy((void*) out, (const void*) PUBLIC_MODULUS_ADDRESS, 256);
+	case Storage::ASSET_t::MODULUS:
+		memcpy((void*) out, (const void*) MODULUS_ADDRESS, 256);
 		break;
-	case Storage::ASSET_t::KEY_EXPONENT:
-		memcpy((void*) out, (const void*)EXPONENT_ADDRESS, 3);
+	case Storage::ASSET_t::PUBLIC_EXPONENT:
+		memcpy((void*) out, (const void*)PUBLIC_EXPONENT_ADDRESS, 3);
 		break;
 	case Storage::ASSET_t::FIRMWARE_HASH:
 		memcpy((void*) out, (const void*)FIRMWARE_HASH_ADDRESS, 32);

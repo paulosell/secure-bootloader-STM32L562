@@ -17,21 +17,21 @@ public:
 
 	Boot();
 	STATUS_t checkFirmwareIntegrity(void);
-	STATUS_t checkFirmwareVersion(void){};
+
 
 	/* Should be used during secure update */
 	STATUS_t checkNewFirmwareSignature(void);
 	STATUS_t checkNewFirmwareVersion(void);
-
+	STATUS_t receiveNewFirmware(void);
 	STATUS_t hasToUpdate(void);
-	STATUS_t updateFirmware();
+
 	STATUS_t validateNewFirmware(void);
 	STATUS_t finishUpdate(void);
 	STATUS_t storeAssets(uint8_t * assets, size_t len);
 	STATUS_t forceUpdateFromBootloader();
 	STATUS_t isButtonPressed();
 
-	//STATUS_t processCommand(COMMAND_t command, DATA_t  data, PROCCESS_RESULT_t * result);
+
 
 };
 

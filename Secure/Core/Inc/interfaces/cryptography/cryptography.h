@@ -40,17 +40,16 @@ public:
 	};
 
 	typedef struct {
-		uint8_t *modulo;
-		uint8_t *expoente;
-		size_t modulo_len;
-		size_t expoente_len;
-	} chave_t;
+		uint8_t *modulus;
+		uint8_t *exponent;
+		size_t modulus_len;
+		size_t exponent_len;
+	} key_t;
 
 	Cryptography();
 	virtual  STATUS_t shaGen(uint8_t * buffer_in, size_t in_len, uint8_t * buffer_out, size_t * out_len, SHA_t sha_type);
 	STATUS_t shaCheck(uint8_t * buffer_expected, uint8_t * buffer_digest, SHA_t sha_type);
-	virtual  STATUS_t sigGen(uint8_t * buffer_in, size_t in_len, uint8_t * buffer_out, size_t *out_len, chave_t * privkey, ALGORITHM_t algo);
-	virtual  STATUS_t sigCheck(uint8_t* buffer_expected, uint8_t * buffer_signature, size_t buffer_in_len, chave_t * pubkey, ALGORITHM_t algo);
+	virtual  STATUS_t sigCheck(uint8_t* buffer_expected, uint8_t * buffer_in, size_t buffer_in_len, key_t * pubkey, ALGORITHM_t algo);
 
 	/*
 	 * User might need to add specific platform methods

@@ -55,12 +55,8 @@ switch(sha_type){
 	return result;
 }
 
-/* MUST BE IMPLEMENTED BY USER*/
-Cryptography::STATUS_t Cryptography::sigGen(uint8_t * buffer_in, size_t in_len, uint8_t * buffer_out, size_t *out_len, chave_t * privkey, ALGORITHM_t algo){
-	return STATUS_t::SUCCESS;
-}
 
 /* MUST BE IMPLEMENTED BY USER*/
-Cryptography::STATUS_t Cryptography::sigCheck(uint8_t* buffer_expected, uint8_t * buffer_signature, size_t buffer_in_len, chave_t * pubkey, ALGORITHM_t algo){
+Cryptography::STATUS_t Cryptography::sigCheck(uint8_t* buffer_expected, uint8_t * buffer_signature, size_t buffer_in_len, key_t * pubkey, ALGORITHM_t algo){
 	return STATUS_t::SUCCESS;
 }

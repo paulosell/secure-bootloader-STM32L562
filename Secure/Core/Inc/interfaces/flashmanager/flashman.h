@@ -28,20 +28,16 @@
 
 /* USER PRIVATE INCLUDE ENDS HERE*/
 
-enum SIZE_t {
-	SIZE_8 = 8, SIZE_16 = 16, SIZE_32 = 32, SIZE_64 = 64
-};
 
 union WORD_t {
-
 	uint8_t  word_8;
 	uint16_t word_16;
 	uint32_t word_32;
 	uint64_t word_64;
 
 };
+
 typedef struct {
-	SIZE_t size;
 	WORD_t word;
 
 } DATA_t ;
@@ -58,11 +54,11 @@ public:
 	FlashManager();
 	virtual STATUS_t flashWrite(DATA_t address, DATA_t word);
 	virtual STATUS_t flashErase(DATA_t address);
-	virtual STATUS_t flashRead(DATA_t address, DATA_t *word_out);
 	virtual STATUS_t flashLock(void);
 	virtual STATUS_t flashUnlock(void);
+
 	STATUS_t flashReadAll(DATA_t address, uint8_t * out, size_t out_len);
-	bool isFlashLocked() ;
+	bool isFlashLocked();
 	void setFlashLocked(bool flashLocked);
 
 private:

@@ -18,8 +18,7 @@ class Bootloader{
 public:
 
 	enum STATE_t{
-		BOOTLOADER = 0x01,
-		APP = 0x02,
+		CHECKING = 0x02,
 		VALIDATION = 0x03,
 		UPDATE_PREPARATION = 0x04,
 		UPDATE_RECEPTION = 0x05,
@@ -31,7 +30,6 @@ public:
 		ACK = 0x00,
 		RESET = 0x01,
 		STATE = 0x02,
-		APP_UPDATE = 0x03,
 		BOOTLOADER_START = 0x04,
 		BOOTLOADER_WRITE = 0x05,
 		BOOTLOADER_DONE = 0x06,
@@ -48,14 +46,12 @@ public:
 	Bootloader();
 	/* Should be used during secure boot */
 	virtual STATUS_t checkFirmwareIntegrity(void);
-	virtual STATUS_t checkFirmwareSignature(void);
-	virtual STATUS_t checkFirmwareVersion(void);
+
 
 	/* Should be used during secure update */
-	virtual STATUS_t checkNewFirmwareIntegrity(void);
 	virtual STATUS_t checkNewFirmwareSignature(void);
 	virtual STATUS_t checkNewFirmwareVersion(void);
-
+	virtual STATUS_t receiveNewFirmware(void);
 	virtual STATUS_t hasToUpdate(void);
 
 

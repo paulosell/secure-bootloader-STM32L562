@@ -13,7 +13,7 @@
 
 /* USER MIGHT INITILIALIZE CLASS DUE TO PLATFORM NEEDS */
 Bootloader::Bootloader() {
-	this->state = STATE_t::BOOTLOADER;
+	this->state = STATE_t::CHECKING;
 	this->is_ready_to_boot = STATUS_t::FAIL;
 }
 
@@ -22,24 +22,7 @@ Bootloader::STATUS_t Bootloader::checkFirmwareIntegrity(void) {
 	return STATUS_t::SUCCESS;
 }
 
-/* MUST BE IMPLEMENTED BY USER*/
-Bootloader::STATUS_t Bootloader::checkFirmwareSignature(void) {
-	return STATUS_t::SUCCESS;
-}
 
-/* MUST BE IMPLEMENTED BY USER*/
-Bootloader::STATUS_t Bootloader::checkFirmwareVersion(void) {
-	return STATUS_t::SUCCESS;
-}
-
-/* MUST BE IMPLEMENTED BY USER*/
-Bootloader::STATUS_t Bootloader::checkNewFirmwareIntegrity(void) {
-	// read all flash space reserved for new firmware
-	// do hash of new firmware
-	// compare hash of new firmware with hash received
-
-	return STATUS_t::SUCCESS;
-}
 
 /* MUST BE IMPLEMENTED BY USER*/
 Bootloader::STATUS_t Bootloader::checkNewFirmwareSignature(void) {
@@ -55,6 +38,11 @@ Bootloader::STATUS_t Bootloader::checkNewFirmwareVersion(void) {
 	// read space where new firmware version is stored
 	// compare new version vs old version
 	return STATUS_t::SUCCESS;
+}
+
+
+Bootloader::STATUS_t Bootloader:: receiveNewFirmware(void){
+
 }
 
 

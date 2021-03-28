@@ -46,47 +46,8 @@ CryptoRSA::STATUS_t CryptoRSA::shaGen(uint8_t *buffer_in, size_t in_len,
 	return STATUS_t::SUCCESS;
 }
 
-CryptoRSA::STATUS_t CryptoRSA::sigGen(uint8_t *buffer_in, size_t in_len,
-		uint8_t *buffer_out, size_t *out_len, chave_t *privkey,
-		ALGORITHM_t algo) {
-
-	uint8_t digest[32];
-	size_t digestLen = 0;
-
-	CryptoRSA::STATUS_t status = this->shaGen(buffer_in, in_len, digest,
-			&digestLen, CryptoRSA::SHA_t::SHA256);
-
-	membuf_stt mb_st;
-
-	/* Initialize the membuf_st that must be passed to the ECC functions */
-	mb_st.mSize = sizeof(preallocated_buffer);
-	mb_st.mUsed = 0;
-	mb_st.pmBuf = preallocated_buffer;
-
-	/* Initialize it the SHA-1 Context */
-	/* Default Flags */
-	RSAprivKey_stt PrivKey_st;
-
-	PrivKey_st.mExponentSize = (int32_t) privkey->expoente_len;
-	PrivKey_st.mModulusSize = (int32_t) privkey->modulo_len;
-	PrivKey_st.pmExponent = privkey->expoente;
-	PrivKey_st.pmModulus = privkey->modulo;
-
-	int32_t ret;
-	if (status == CryptoRSA::STATUS_t::SUCCESS) {
-		/* Sign with RSA */
-		ret = RSA_PKCS1v15_Sign(&PrivKey_st, digest, E_SHA256, buffer_out,
-				&mb_st);
-
-	}
-	if (ret != RSA_SUCCESS) {
-		return STATUS_t::FAIL;
-	}
-	return STATUS_t::SUCCESS;
-
-}
 CryptoRSA::STATUS_t CryptoRSA::sigCheck(uint8_t *buffer_expected,
-		uint8_t *buffer_in, size_t buffer_in_len, chave_t *pubkey, ALGORITHM_t algo) {
+		uint8_t *buffer_in, size_t buffer_in_len, key_t *pubkey, ALGORITHM_t algo) {
 
 	membuf_stt mb_st;
 	mb_st.mSize = sizeof(preallocated_buffer);
@@ -99,10 +60,10 @@ CryptoRSA::STATUS_t CryptoRSA::sigCheck(uint8_t *buffer_expected,
 			CryptoRSA::SHA_t::SHA256);
 	RSApubKey_stt chave;
 
-	chave.mExponentSize = (int32_t) pubkey->expoente_len;
-	chave.mModulusSize = (int32_t) pubkey->modulo_len;
-	chave.pmExponent = pubkey->expoente;
-	chave.pmModulus = pubkey->modulo;
+	chave.mExponentSize = (int32_t) pubkey->exponent_len;
+	chave.mModulusSize = (int32_t) pubkey->modulus_len;
+	chave.pmExponent = pubkey->exponent;
+	chave.pmModulus = pubkey->modulus;
 
 	int32_t ret;
 	if (status == CryptoRSA::STATUS_t::SUCCESS) {

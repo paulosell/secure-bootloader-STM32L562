@@ -102,28 +102,6 @@ Flash::STATUS_t Flash::flashErase(DATA_t address, size_t num_pages) {
 }
 
 
-Flash::STATUS_t Flash::flashRead(DATA_t address, DATA_t *word_out) {
-
-	switch (word_out->size){
-	case SIZE_8:
-		word_out->word.word_8 = * (uint8_t *)address.word.word_32;
-		break;
-	case SIZE_16:
-		word_out->word.word_16 = * (uint16_t *)address.word.word_32;
-		break;
-	case SIZE_32:
-		word_out->word.word_32 = * (uint32_t *)address.word.word_32;
-		break;
-	case SIZE_64:
-		word_out->word.word_64 = * (uint64_t *)address.word.word_32;
-		break;
-	}
-
-	return Flash::STATUS_t::SUCCESS;
-
-
-
-}
 
 Flash::STATUS_t Flash::flashLock(void) {
 

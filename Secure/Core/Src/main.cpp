@@ -23,15 +23,14 @@ int main(void) {
 	}
 
 	if (b.hasToUpdate()) {
-		while (b.updateFirmware() == Boot::STATUS_t::FAIL)
+		while (b.receiveNewFirmware() == Boot::STATUS_t::FAIL)
 			;
 	}
 
 	b.setState(Boot::STATE_t::VALIDATION);
 
 	while (b.checkFirmwareIntegrity() != Boot::STATUS_t::SUCCESS) {
-		b.setState(Boot::STATE_t::BOOTLOADER);
-		b.updateFirmware();
+		b.receiveNewFirmware();
 	}
 
 	j.goToNonSecure();
