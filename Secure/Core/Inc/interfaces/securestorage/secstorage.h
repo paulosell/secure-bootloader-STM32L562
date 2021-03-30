@@ -17,7 +17,7 @@
 
 #define ATTESTATION_KEY_PAGE			120
 #define MODULUS_ADDRESS  		((uint32_t)0x0803C000)
-#define PUBLIC_EXPONENT_ADDRESS 				(PUBLIC_MODULUS_ADDRESS + 256) //0x0803C100
+#define PUBLIC_EXPONENT_ADDRESS 				(MODULUS_ADDRESS + 256) //0x0803C100
 
 #define FIRMWARE_ASSETS_PAGE			121
 #define FIRMWARE_HASH_ADDRESS   		((uint32_t)0x0803C800)
@@ -62,6 +62,7 @@ public:
 	SecureStorage();
 	virtual STATUS_t readData(DATA_t address, uint8_t * out, ASSET_t asset);
 	virtual STATUS_t writeData(DATA_t address, DATA_t data);
+	virtual STATUS_t eraseData(DATA_t address);
 
 	/*
 	 * User might need to add specific platform methods

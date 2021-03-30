@@ -16,6 +16,8 @@ public:
 	Storage(){};
 	STATUS_t readData(uint8_t * out, ASSET_t asset);
 	STATUS_t writeData(DATA_t address, DATA_t data);
+	STATUS_t eraseData(DATA_t address);
+
 
 };
 

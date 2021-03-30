@@ -56,6 +56,18 @@ Storage::STATUS_t Storage::readData(uint8_t * out, ASSET_t asset){
 
 }
 
+Storage::STATUS_t Storage::eraseData(DATA_t address){
+	Flash f;
+
+	if (f.flashErase(address) != Flash::STATUS_t::SUCCESS){
+		return Storage::STATUS_t::FAIL;
+	}
+
+	return Storage::STATUS_t::SUCCESS;
+
+
+}
+
 Storage::STATUS_t Storage::writeData(DATA_t address, DATA_t data){
 	Flash f;
 
@@ -64,8 +76,6 @@ Storage::STATUS_t Storage::writeData(DATA_t address, DATA_t data){
 	}
 
 	return Storage::STATUS_t::SUCCESS;
-
-
 
 
 }

@@ -28,3 +28,8 @@ SecureStorage::STATUS_t SecureStorage::writeData(DATA_t address, DATA_t data){
 }
 
 
+SecureStorage::STATUS_t SecureStorage::eraseData(DATA_t address){
+	return STATUS_t::SUCCESS;
+}
+
+
